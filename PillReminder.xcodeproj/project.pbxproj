@@ -8,18 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		9E4C5B1C280CF26300815010 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C5B1B280CF26300815010 /* AppDelegate.swift */; };
-		9E4C5B20280CF26300815010 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C5B1F280CF26300815010 /* ViewController.swift */; };
+		9E4C5B20280CF26300815010 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C5B1F280CF26300815010 /* TodayViewController.swift */; };
 		9E4C5B25280CF26400815010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E4C5B24280CF26400815010 /* Assets.xcassets */; };
 		9E4C5B28280CF26400815010 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E4C5B26280CF26400815010 /* LaunchScreen.storyboard */; };
+		9ED3B542280D78C200968A4E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B541280D78C200968A4E /* TabBarController.swift */; };
+		9ED3B544280D793400968A4E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B543280D793400968A4E /* CalendarViewController.swift */; };
+		9ED3B546280D794700968A4E /* MedicationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B545280D794700968A4E /* MedicationsViewController.swift */; };
+		9ED3B54B280DFE9100968A4E /* ItemToTake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B54A280DFE9100968A4E /* ItemToTake.swift */; };
+		9ED3B54E280E024700968A4E /* TodayViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B54D280E024700968A4E /* TodayViewHeader.swift */; };
+		9ED3B550280E3A0B00968A4E /* NewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B54F280E3A0B00968A4E /* NewItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9E4C5B18280CF26300815010 /* PillReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PillReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E4C5B1B280CF26300815010 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9E4C5B1F280CF26300815010 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9E4C5B1F280CF26300815010 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		9E4C5B24280CF26400815010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E4C5B27280CF26400815010 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E4C5B29280CF26400815010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9ED3B541280D78C200968A4E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		9ED3B543280D793400968A4E /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		9ED3B545280D794700968A4E /* MedicationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationsViewController.swift; sourceTree = "<group>"; };
+		9ED3B54A280DFE9100968A4E /* ItemToTake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToTake.swift; sourceTree = "<group>"; };
+		9ED3B54D280E024700968A4E /* TodayViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewHeader.swift; sourceTree = "<group>"; };
+		9ED3B54F280E3A0B00968A4E /* NewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +65,50 @@
 			isa = PBXGroup;
 			children = (
 				9E4C5B1B280CF26300815010 /* AppDelegate.swift */,
-				9E4C5B1F280CF26300815010 /* ViewController.swift */,
+				9ED3B547280DE65700968A4E /* Views */,
+				9ED3B549280DFE7D00968A4E /* Models */,
 				9E4C5B24280CF26400815010 /* Assets.xcassets */,
 				9E4C5B26280CF26400815010 /* LaunchScreen.storyboard */,
 				9E4C5B29280CF26400815010 /* Info.plist */,
 			);
 			path = PillReminder;
+			sourceTree = "<group>";
+		};
+		9ED3B547280DE65700968A4E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9ED3B548280DE66500968A4E /* TabViews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9ED3B548280DE66500968A4E /* TabViews */ = {
+			isa = PBXGroup;
+			children = (
+				9ED3B54C280E023500968A4E /* TodayView */,
+				9ED3B541280D78C200968A4E /* TabBarController.swift */,
+				9ED3B543280D793400968A4E /* CalendarViewController.swift */,
+				9ED3B545280D794700968A4E /* MedicationsViewController.swift */,
+			);
+			path = TabViews;
+			sourceTree = "<group>";
+		};
+		9ED3B549280DFE7D00968A4E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9ED3B54A280DFE9100968A4E /* ItemToTake.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9ED3B54C280E023500968A4E /* TodayView */ = {
+			isa = PBXGroup;
+			children = (
+				9E4C5B1F280CF26300815010 /* TodayViewController.swift */,
+				9ED3B54D280E024700968A4E /* TodayViewHeader.swift */,
+				9ED3B54F280E3A0B00968A4E /* NewItemViewController.swift */,
+			);
+			path = TodayView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +181,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E4C5B20280CF26300815010 /* ViewController.swift in Sources */,
+				9ED3B544280D793400968A4E /* CalendarViewController.swift in Sources */,
+				9ED3B54E280E024700968A4E /* TodayViewHeader.swift in Sources */,
+				9ED3B542280D78C200968A4E /* TabBarController.swift in Sources */,
+				9ED3B54B280DFE9100968A4E /* ItemToTake.swift in Sources */,
+				9E4C5B20280CF26300815010 /* TodayViewController.swift in Sources */,
+				9ED3B546280D794700968A4E /* MedicationsViewController.swift in Sources */,
+				9ED3B550280E3A0B00968A4E /* NewItemViewController.swift in Sources */,
 				9E4C5B1C280CF26300815010 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
