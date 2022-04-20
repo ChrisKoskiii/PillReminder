@@ -9,7 +9,7 @@ import Foundation
 
 struct ItemToTake {
   var name: String
-  var amount: Int
+  var amount: String
   var units: String  //make enum for capsule, scoop, tbs, ect?
 //  var frequency - incoorperate with calendar? Daily, eveyr other tday, twice a day, ect
 }

@@ -17,11 +17,17 @@ class TodayViewController: UIViewController {
   let menuButton = UIButton(type: .system)
   let titleLabel = UILabel()
   
+  let newItemVC = NewItemViewController()
+  
+  var itemArray = [ItemToTake]()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    newItemVC.delegate = self
+    
     style()
     layout()
-    
   }
 }
 
@@ -93,15 +99,19 @@ extension TodayViewController {
 //MARK: Actions
 extension TodayViewController {
   @objc func addItemTapped() {
-    print("added item")
+    newItemVC.modalPresentationStyle = .popover
+    // Keep animated value as false
+    // Custom Modal presentation animation will be handled in VC itself
+    self.present(newItemVC, animated: true)
   }
   
   @objc func menuButtonTapped() {
-    print("menu tapped")
+    print(itemArray)
   }
 }
 
 // MARK: TableView protocols
+
 extension TodayViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     myArray.count
@@ -117,6 +127,12 @@ extension TodayViewController: UITableViewDataSource {
 extension TodayViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     print("User selected table row \(indexPath.row) and item \(myArray[indexPath.row])")
+  }
+}
+
+extension TodayViewController: NewItemViewControllerDelegate {
+  func newItemCreated(_ newItem: ItemToTake) {
+    itemArray.append(newItem)
   }
 }
 
