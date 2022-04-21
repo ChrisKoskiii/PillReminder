@@ -16,26 +16,41 @@ class TodayViewController: UIViewController {
   let addItemButton = UIButton(type: .system)
   let menuButton = UIButton(type: .system)
   let titleLabel = UILabel()
-  
   let newItemVC = NewItemViewController()
   
   var itemArray = [ItemToTake]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     newItemVC.delegate = self
-    
+
     style()
     layout()
+    setupTable()
+    registerTableViewCells()
   }
 }
-
+// Table Setup
 extension TodayViewController {
-  private func style() {
+  private func setupTable() {
     let screenSize: CGRect = UIScreen.main.bounds
     let screenWidth = screenSize.width
     let screenHeight = screenSize.height
+    
+    myTable.translatesAutoresizingMaskIntoConstraints = false
+    myTable.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+    myTable.dataSource = self
+    myTable.delegate = self
+    
+    myTable.register(TodayViewCell.self, forCellReuseIdentifier: TodayViewCell.reuseID)
+    myTable.rowHeight = TodayViewCell.rowHeight
+  }
+  
+  private func registerTableViewCells() {
+    let itemCell = UINib(nibName: "CustomTableViewCell", bundle: nil)
+    self.myTable.register(itemCell, forCellReuseIdentifier: "CustomTableViewCell")
+  }
+  private func style() {
     
     //Stack Views
     verticalStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,13 +61,6 @@ extension TodayViewController {
     buttonStackView.axis = .horizontal
     buttonStackView.spacing = 8
     
-    // UITableView
-    myTable.translatesAutoresizingMaskIntoConstraints = false
-    myTable.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-    myTable.dataSource = self
-    myTable.delegate = self
-    myTable.register(UITableViewCell.self, forCellReuseIdentifier: "myCell")
-
     //Buttons
     menuButton.translatesAutoresizingMaskIntoConstraints = false
     menuButton.configuration = .plain()
@@ -106,6 +114,7 @@ extension TodayViewController {
   }
   
   @objc func menuButtonTapped() {
+    myTable.reloadData()
     print(itemArray)
   }
 }
@@ -114,12 +123,11 @@ extension TodayViewController {
 
 extension TodayViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    myArray.count
+    itemArray.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-    cell.textLabel?.text = self.myArray[indexPath.row]
+    let cell = tableView.dequeueReusableCell(withIdentifier: TodayViewCell.reuseID, for: indexPath) as! TodayViewCell
     return cell
   }
 }
@@ -133,6 +141,9 @@ extension TodayViewController: UITableViewDelegate {
 extension TodayViewController: NewItemViewControllerDelegate {
   func newItemCreated(_ newItem: ItemToTake) {
     itemArray.append(newItem)
+    DispatchQueue.main.async {
+      self.myTable.reloadData()
+    }
   }
 }
 

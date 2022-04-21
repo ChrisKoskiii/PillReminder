@@ -64,7 +64,6 @@ extension NewItemViewController {
     delegate?.newItemCreated(itemToAdd)
     testArray.append(itemToAdd)
     self.dismiss(animated: true, completion: nil)
-    print(testArray)
   }
 }
 

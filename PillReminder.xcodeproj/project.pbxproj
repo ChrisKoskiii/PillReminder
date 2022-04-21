@@ -18,6 +18,8 @@
 		9ED3B54E280E024700968A4E /* TodayViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B54D280E024700968A4E /* TodayViewHeader.swift */; };
 		9ED3B550280E3A0B00968A4E /* NewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B54F280E3A0B00968A4E /* NewItemViewController.swift */; };
 		9ED3B553280F34A500968A4E /* NewItemTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B552280F34A500968A4E /* NewItemTableView.swift */; };
+		9ED3B55B28108AA900968A4E /* TodayViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B55A28108AA900968A4E /* TodayViewCell.swift */; };
+		9ED3B55D2810CFF400968A4E /* CheckMarkImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B55C2810CFF400968A4E /* CheckMarkImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		9ED3B54D280E024700968A4E /* TodayViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewHeader.swift; sourceTree = "<group>"; };
 		9ED3B54F280E3A0B00968A4E /* NewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemViewController.swift; sourceTree = "<group>"; };
 		9ED3B552280F34A500968A4E /* NewItemTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemTableView.swift; sourceTree = "<group>"; };
+		9ED3B55A28108AA900968A4E /* TodayViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewCell.swift; sourceTree = "<group>"; };
+		9ED3B55C2810CFF400968A4E /* CheckMarkImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 			children = (
 				9E4C5B1F280CF26300815010 /* TodayViewController.swift */,
 				9ED3B54D280E024700968A4E /* TodayViewHeader.swift */,
+				9ED3B55A28108AA900968A4E /* TodayViewCell.swift */,
+				9ED3B55C2810CFF400968A4E /* CheckMarkImage.swift */,
 			);
 			path = TodayView;
 			sourceTree = "<group>";
@@ -199,7 +205,9 @@
 				9E4C5B20280CF26300815010 /* TodayViewController.swift in Sources */,
 				9ED3B546280D794700968A4E /* MedicationsViewController.swift in Sources */,
 				9ED3B553280F34A500968A4E /* NewItemTableView.swift in Sources */,
+				9ED3B55D2810CFF400968A4E /* CheckMarkImage.swift in Sources */,
 				9ED3B550280E3A0B00968A4E /* NewItemViewController.swift in Sources */,
+				9ED3B55B28108AA900968A4E /* TodayViewCell.swift in Sources */,
 				9E4C5B1C280CF26300815010 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
