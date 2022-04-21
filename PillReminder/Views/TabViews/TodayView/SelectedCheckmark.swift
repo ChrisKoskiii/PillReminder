@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CheckMarkImage: UIView {
+class SelectedCheckmark: UIView {
   
   let checkmarkImage = UIImageView()
   
@@ -28,11 +28,11 @@ class CheckMarkImage: UIView {
   }
 }
 
-extension CheckMarkImage {
+extension SelectedCheckmark {
   private func style() {
     translatesAutoresizingMaskIntoConstraints = false
     checkmarkImage.translatesAutoresizingMaskIntoConstraints = false
-    let image = UIImage(systemName: "checkmark.circle")!.withTintColor(.black, renderingMode: .alwaysOriginal)
+    let image = UIImage(systemName: "checkmark.circle.fill")!.withTintColor(.systemMint, renderingMode: .alwaysOriginal)
     checkmarkImage.image = image
   }
   
@@ -54,6 +54,6 @@ extension CheckMarkImage {
   }
   
   @objc func checkmarkImageTapped(_ recognizer: UITapGestureRecognizer) {
-    //Do stuff
+    print("check clicked")
   }
 }

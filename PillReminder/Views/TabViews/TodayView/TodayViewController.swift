@@ -19,6 +19,7 @@ class TodayViewController: UIViewController {
   let newItemVC = NewItemViewController()
   
   var itemArray = [ItemToTake]()
+  var todayCellViewModels: [TodayViewCell.ViewModel] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,6 +50,11 @@ extension TodayViewController {
   private func registerTableViewCells() {
     let itemCell = UINib(nibName: "CustomTableViewCell", bundle: nil)
     self.myTable.register(itemCell, forCellReuseIdentifier: "CustomTableViewCell")
+  }
+  
+  private func reloadView() {
+    self.configureTableCells(with: self.itemArray)
+    self.myTable.reloadData()
   }
   private func style() {
     
@@ -117,6 +123,10 @@ extension TodayViewController {
     myTable.reloadData()
     print(itemArray)
   }
+  
+  func changeCheckmark(item: ItemToTake) {
+    
+  }
 }
 
 // MARK: TableView protocols
@@ -127,14 +137,37 @@ extension TodayViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: TodayViewCell.reuseID, for: indexPath) as! TodayViewCell
+    guard !todayCellViewModels.isEmpty else { return UITableViewCell() }
+    let item = todayCellViewModels[indexPath.row]
+    
+    let cell = myTable.dequeueReusableCell(withIdentifier: TodayViewCell.reuseID, for: indexPath) as! TodayViewCell
+    cell.configure(with: item, isDone: item.isDone)
+    cell.selectionStyle = .none
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+          itemArray.remove(at: indexPath.row)
+          tableView.deleteRows(at: [indexPath], with: .fade)
+      } else if editingStyle == .insert {
+          // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+      }
+  }
+  
+  private func configureTableCells(with items: [ItemToTake]) {
+    todayCellViewModels = items.map {
+      TodayViewCell.ViewModel(itemName: $0.name, amount: $0.amount, frequency: $0.units, isDone: false)
+    }
   }
 }
 
 extension TodayViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("User selected table row \(indexPath.row) and item \(myArray[indexPath.row])")
+    itemArray[indexPath.row].isDone = !itemArray[indexPath.row].isDone
+    print(itemArray[indexPath.row].isDone)
+    let cell = tableView.cellForRow(at: indexPath) as! TodayViewCell
+    cell.changeCheckmark(isDone: itemArray[indexPath.row].isDone)
   }
 }
 
@@ -142,7 +175,7 @@ extension TodayViewController: NewItemViewControllerDelegate {
   func newItemCreated(_ newItem: ItemToTake) {
     itemArray.append(newItem)
     DispatchQueue.main.async {
-      self.myTable.reloadData()
+      self.reloadView()
     }
   }
 }

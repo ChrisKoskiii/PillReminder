@@ -60,17 +60,19 @@ extension NewItemViewController {
 // MARK: Actions
 extension NewItemViewController {
   @objc func addItemTapped() {
-    let itemToAdd = newItem(name: tableView.titleTextInput.text!, amount: tableView.unitsTextInput.text!, frequency: tableView.frequencyTextInput.text!)
+    let itemToAdd = newItem(name: tableView.titleTextInput.text!, amount: tableView.unitsTextInput.text!, frequency: tableView.frequencyTextInput.text!, isDone: false)
     delegate?.newItemCreated(itemToAdd)
-    testArray.append(itemToAdd)
+    tableView.titleTextInput.text?.removeAll()
+    tableView.unitsTextInput.text?.removeAll()
+    tableView.frequencyTextInput.text?.removeAll()
     self.dismiss(animated: true, completion: nil)
   }
 }
 
 // MARK: New item creation
 extension NewItemViewController {
-  func newItem(name: String, amount: String, frequency: String) -> ItemToTake {
-    let newItem = ItemToTake(name: name, amount: amount, units: frequency)
+  func newItem(name: String, amount: String, frequency: String, isDone: Bool) -> ItemToTake {
+    let newItem = ItemToTake(name: name, amount: amount, units: frequency, isDone: false)
     return newItem
   }
 }

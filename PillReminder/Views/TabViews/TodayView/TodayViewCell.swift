@@ -14,6 +14,7 @@ class TodayViewCell: UITableViewCell {
     let itemName: String
     let amount: String
     let frequency: String
+    var isDone: Bool
   }
   let viewModel: ViewModel? = nil
   
@@ -25,11 +26,13 @@ class TodayViewCell: UITableViewCell {
   let underlineView = UIView()
   
   // Checkmark Image
-  let checkmarkImage = CheckMarkImage()
+  let selectedCheckmark = SelectedCheckmark()
+  let unselectedCheckmark = UnselectedCheckmark()
   
   // Utils
   static let reuseID = "AccountSummaryCell"
   static let rowHeight: CGFloat = 112
+  var isDone = false
   
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -47,9 +50,9 @@ class TodayViewCell: UITableViewCell {
 extension TodayViewCell {
   private func setup() {
     
-//    labelStack.translatesAutoresizingMaskIntoConstraints = false
-//    labelStack.axis = .vertical
-//    labelStack.spacing = 8
+    //    labelStack.translatesAutoresizingMaskIntoConstraints = false
+    //    labelStack.axis = .vertical
+    //    labelStack.spacing = 8
     
     
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -70,6 +73,7 @@ extension TodayViewCell {
     frequencyLabel.adjustsFontForContentSizeCategory = true
     frequencyLabel.text = "Every Morning"
     
+    selectedCheckmark.isHidden = true
   }
   
   private func layout() {
@@ -78,7 +82,8 @@ extension TodayViewCell {
     addSubview(amountLabel)
     addSubview(frequencyLabel)
     
-    addSubview(checkmarkImage)
+    addSubview(selectedCheckmark)
+    addSubview(unselectedCheckmark)
     
     NSLayoutConstraint.activate([
       nameLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1),
@@ -95,9 +100,35 @@ extension TodayViewCell {
       frequencyLabel.topAnchor.constraint(equalToSystemSpacingBelow: amountLabel.bottomAnchor, multiplier: 1),
       frequencyLabel.leadingAnchor.constraint(equalTo: amountLabel.leadingAnchor),
       
-      checkmarkImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-      trailingAnchor.constraint(equalToSystemSpacingAfter: checkmarkImage.trailingAnchor, multiplier: 2)
+      selectedCheckmark.centerYAnchor.constraint(equalTo: centerYAnchor),
+      trailingAnchor.constraint(equalToSystemSpacingAfter: selectedCheckmark.trailingAnchor, multiplier: 2),
+      
+      unselectedCheckmark.centerYAnchor.constraint(equalTo: centerYAnchor),
+      trailingAnchor.constraint(equalToSystemSpacingAfter: unselectedCheckmark.trailingAnchor, multiplier: 2)
     ])
     
+  }
+}
+
+extension TodayViewCell {
+  func configure(with vm: ViewModel, isDone: Bool) {
+    nameLabel.text = vm.itemName
+    amountLabel.text = vm.amount
+    frequencyLabel.text = vm.frequency
+  }
+  
+  func changeCheckmark(isDone: Bool) {
+    if isDone {
+      UIView.transition(with: self, duration: 0.5, options: [.transitionCrossDissolve], animations: { [self] in
+        self.selectedCheckmark.isHidden = false
+        unselectedCheckmark.isHidden = true
+      }, completion: nil)
+    } else {
+      UIView.transition(with: self, duration: 0.5, options: [.transitionCrossDissolve], animations: { [self] in
+        selectedCheckmark.isHidden = true
+        unselectedCheckmark.isHidden = false
+      }, completion: nil)
+
+    }
   }
 }

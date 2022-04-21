@@ -78,6 +78,7 @@ extension NewItemTableView: UITextFieldDelegate {
   
 }
 
+// Divider Line
 class DividerView: UIView {
   
   override init(frame: CGRect) {
