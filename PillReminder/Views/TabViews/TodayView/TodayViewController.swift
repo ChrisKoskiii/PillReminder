@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TodayViewController: UIViewController {
   
@@ -20,6 +21,9 @@ class TodayViewController: UIViewController {
   
   var itemArray = [ItemToTake]()
   var todayCellViewModels: [TodayViewCell.ViewModel] = []
+  
+  var items: [NSManagedObject] = []
+    //test branch
   
   override func viewDidLoad() {
     super.viewDidLoad()

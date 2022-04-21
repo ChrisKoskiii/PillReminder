@@ -20,6 +20,7 @@
 		9ED3B55B28108AA900968A4E /* TodayViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B55A28108AA900968A4E /* TodayViewCell.swift */; };
 		9ED3B55D2810CFF400968A4E /* SelectedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B55C2810CFF400968A4E /* SelectedCheckmark.swift */; };
 		9ED3B55F281191EA00968A4E /* UnselectedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B55E281191EA00968A4E /* UnselectedCheckmark.swift */; };
+		9ED3B5622811AA6000968A4E /* ItemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B5602811AA6000968A4E /* ItemModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		9ED3B55A28108AA900968A4E /* TodayViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewCell.swift; sourceTree = "<group>"; };
 		9ED3B55C2810CFF400968A4E /* SelectedCheckmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCheckmark.swift; sourceTree = "<group>"; };
 		9ED3B55E281191EA00968A4E /* UnselectedCheckmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnselectedCheckmark.swift; sourceTree = "<group>"; };
+		9ED3B5612811AA6000968A4E /* ItemModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ItemModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				9E4C5B24280CF26400815010 /* Assets.xcassets */,
 				9E4C5B26280CF26400815010 /* LaunchScreen.storyboard */,
 				9E4C5B29280CF26400815010 /* Info.plist */,
+				9ED3B5602811AA6000968A4E /* ItemModel.xcdatamodeld */,
 			);
 			path = PillReminder;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				9ED3B54B280DFE9100968A4E /* ItemToTake.swift in Sources */,
 				9E4C5B20280CF26300815010 /* TodayViewController.swift in Sources */,
 				9ED3B546280D794700968A4E /* MedicationsViewController.swift in Sources */,
+				9ED3B5622811AA6000968A4E /* ItemModel.xcdatamodeld in Sources */,
 				9ED3B553280F34A500968A4E /* NewItemTableView.swift in Sources */,
 				9ED3B55D2810CFF400968A4E /* SelectedCheckmark.swift in Sources */,
 				9ED3B550280E3A0B00968A4E /* NewItemViewController.swift in Sources */,
@@ -416,6 +420,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9ED3B5602811AA6000968A4E /* ItemModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9ED3B5612811AA6000968A4E /* ItemModel.xcdatamodel */,
+			);
+			currentVersion = 9ED3B5612811AA6000968A4E /* ItemModel.xcdatamodel */;
+			path = ItemModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9E4C5B10280CF26300815010 /* Project object */;
 }
