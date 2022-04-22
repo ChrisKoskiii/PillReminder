@@ -21,9 +21,13 @@
 		9ED3B55D2810CFF400968A4E /* SelectedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B55C2810CFF400968A4E /* SelectedCheckmark.swift */; };
 		9ED3B55F281191EA00968A4E /* UnselectedCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B55E281191EA00968A4E /* UnselectedCheckmark.swift */; };
 		9ED3B5622811AA6000968A4E /* ItemModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9ED3B5602811AA6000968A4E /* ItemModel.xcdatamodeld */; };
+		B8A4D319414D15D1D6162B29 /* Pods_PillReminder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC4A01303D5000E83569775 /* Pods_PillReminder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DC4A01303D5000E83569775 /* Pods_PillReminder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PillReminder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51539DA8080728A8E7691DF5 /* Pods-PillReminder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PillReminder.debug.xcconfig"; path = "Target Support Files/Pods-PillReminder/Pods-PillReminder.debug.xcconfig"; sourceTree = "<group>"; };
+		9073DF9EED9B431BC827D0D7 /* Pods-PillReminder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PillReminder.release.xcconfig"; path = "Target Support Files/Pods-PillReminder/Pods-PillReminder.release.xcconfig"; sourceTree = "<group>"; };
 		9E4C5B18280CF26300815010 /* PillReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PillReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E4C5B1B280CF26300815010 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E4C5B1F280CF26300815010 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -47,17 +51,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8A4D319414D15D1D6162B29 /* Pods_PillReminder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21CC2BBCEA3F59E30D0B714F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				51539DA8080728A8E7691DF5 /* Pods-PillReminder.debug.xcconfig */,
+				9073DF9EED9B431BC827D0D7 /* Pods-PillReminder.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		548757F593F021E335D8F071 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DC4A01303D5000E83569775 /* Pods_PillReminder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9E4C5B0F280CF26300815010 = {
 			isa = PBXGroup;
 			children = (
 				9E4C5B1A280CF26300815010 /* PillReminder */,
 				9E4C5B19280CF26300815010 /* Products */,
+				21CC2BBCEA3F59E30D0B714F /* Pods */,
+				548757F593F021E335D8F071 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,9 +163,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E4C5B2C280CF26400815010 /* Build configuration list for PBXNativeTarget "PillReminder" */;
 			buildPhases = (
+				78340A514B3EAA415C654D89 /* [CP] Check Pods Manifest.lock */,
 				9E4C5B14280CF26300815010 /* Sources */,
 				9E4C5B15280CF26300815010 /* Frameworks */,
 				9E4C5B16280CF26300815010 /* Resources */,
+				7056C2FFAA0FDE69765846F1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -195,6 +222,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7056C2FFAA0FDE69765846F1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PillReminder/Pods-PillReminder-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PillReminder/Pods-PillReminder-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PillReminder/Pods-PillReminder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78340A514B3EAA415C654D89 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PillReminder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9E4C5B14280CF26300815010 /* Sources */ = {
@@ -346,6 +415,7 @@
 		};
 		9E4C5B2D280CF26400815010 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51539DA8080728A8E7691DF5 /* Pods-PillReminder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -373,6 +443,7 @@
 		};
 		9E4C5B2E280CF26400815010 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9073DF9EED9B431BC827D0D7 /* Pods-PillReminder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

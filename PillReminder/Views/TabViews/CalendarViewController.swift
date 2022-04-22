@@ -6,39 +6,42 @@
 //
 
 import UIKit
+import FSCalendar
 
 class CalendarViewController: UIViewController {
   
-  let stackView = UIStackView()
-  let label = UILabel()
+  var calendar = FSCalendar()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    calendar.delegate = self
     
     style()
     layout()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    calendar.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height / 1.5 )
+    calendar.frame = calendar.frame.inset(by: UIEdgeInsets(top: 40, left: 16, bottom: 16, right: 16))
   }
 }
 
 extension CalendarViewController {
   private func style() {
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.spacing = 20
     
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.text = "Welcome"
-    label.font = UIFont.preferredFont(forTextStyle: .title1)
   }
   
   private func layout() {
-    stackView.addArrangedSubview(label)
-    
-    view.addSubview(stackView)
-    
-    NSLayoutConstraint.activate([
-      stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-    ])
+    view.addSubview(calendar)
+  }
+}
+
+extension CalendarViewController: FSCalendarDelegate {
+  func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "EEEE MM-dd-YYYY"
+    let string = formatter.string(from: date)
+    print("\(string)")
   }
 }
