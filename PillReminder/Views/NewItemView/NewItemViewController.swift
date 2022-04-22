@@ -72,7 +72,7 @@ extension NewItemViewController {
 // MARK: New item creation
 extension NewItemViewController {
   func newItem(name: String, amount: String, frequency: String, isDone: Bool) -> ItemToTake {
-    let newItem = ItemToTake(name: name, amount: amount, units: frequency, isDone: false)
+    let newItem = ItemToTake(name: name, amount: amount, frequency: frequency, isDone: false)
     return newItem
   }
 }
