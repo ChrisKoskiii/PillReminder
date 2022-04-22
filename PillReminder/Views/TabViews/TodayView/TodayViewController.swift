@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 class TodayViewController: UIViewController {
   
   private var myTable = UITableView()
-  private var myArray = ["Vitamin C", "Alpha Brain", "Elderberry", "Fish Oil"]
   let verticalStackView = UIStackView()
   let buttonStackView = UIStackView()
   let addItemButton = UIButton(type: .system)
@@ -21,14 +21,17 @@ class TodayViewController: UIViewController {
   var itemArray = [ItemToTake]()
   var todayCellViewModels: [TodayViewCell.ViewModel] = []
   
+  var items: [NSManagedObject] = []
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     newItemVC.delegate = self
-
+    
     style()
     layout()
     setupTable()
     registerTableViewCells()
+    reloadView()
   }
 }
 // Table Setup
@@ -53,7 +56,26 @@ extension TodayViewController {
   }
   
   private func reloadView() {
-    self.configureTableCells(with: self.itemArray)
+    //1
+    guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+      return
+    }
+    
+    let managedContext =
+    appDelegate.persistentContainer.viewContext
+    
+    //2
+    let fetchRequest =
+    NSFetchRequest<NSManagedObject>(entityName: "Item")
+    
+    //3
+    do {
+      items = try managedContext.fetch(fetchRequest)
+    } catch let error as NSError {
+      print("Could not fetch. \(error), \(error.userInfo)")
+    }
+    self.configureTableCells(with: self.items)
     self.myTable.reloadData()
   }
   private func style() {
@@ -110,12 +132,11 @@ extension TodayViewController {
     ])
   }
 }
+
 //MARK: Actions
 extension TodayViewController {
   @objc func addItemTapped() {
     newItemVC.modalPresentationStyle = .popover
-    // Keep animated value as false
-    // Custom Modal presentation animation will be handled in VC itself
     self.present(newItemVC, animated: true)
   }
   
@@ -133,7 +154,7 @@ extension TodayViewController {
 
 extension TodayViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    itemArray.count
+    items.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,35 +168,75 @@ extension TodayViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-      if editingStyle == .delete {
-          itemArray.remove(at: indexPath.row)
-          tableView.deleteRows(at: [indexPath], with: .fade)
-      } else if editingStyle == .insert {
-          // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-      }
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return }
+    guard editingStyle == .delete else { return }
+    let itemToDelete = items.remove(at: indexPath.row)
+    appDelegate.persistentContainer.viewContext.delete(itemToDelete)
+    tableView.deleteRows(at: [indexPath], with: .automatic)
+    
+    do {
+      try appDelegate.persistentContainer.viewContext.save()
+    } catch let error as NSError {
+      print("Could not save. \(error), \(error.userInfo)")
+    }
+    
   }
   
-  private func configureTableCells(with items: [ItemToTake]) {
-    todayCellViewModels = items.map {
-      TodayViewCell.ViewModel(itemName: $0.name, amount: $0.amount, frequency: $0.units, isDone: false)
+  private func configureTableCells(with itemsToUse: [NSManagedObject]) {
+    todayCellViewModels = itemsToUse.map {
+      TodayViewCell.ViewModel(itemName: $0.value(forKey: "name") as! String, amount: $0.value(forKey: "amount") as! String, frequency: $0.value(forKey: "frequency") as! String, isDone: false)
     }
   }
 }
-
 extension TodayViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    itemArray[indexPath.row].isDone = !itemArray[indexPath.row].isDone
-    print(itemArray[indexPath.row].isDone)
-    let cell = tableView.cellForRow(at: indexPath) as! TodayViewCell
-    cell.changeCheckmark(isDone: itemArray[indexPath.row].isDone)
+    var myBool = items[indexPath.row].value(forKey: "isDone") as! Bool
+    print(myBool)
+    myBool = !myBool
+    saveToCoreData()
+    print(myBool)
   }
 }
 
 extension TodayViewController: NewItemViewControllerDelegate {
   func newItemCreated(_ newItem: ItemToTake) {
-    itemArray.append(newItem)
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return
+    }
+    
+    let managedContext = appDelegate.persistentContainer.viewContext
+    
+    let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
+    
+    let item = NSManagedObject(entity: entity, insertInto: managedContext)
+    
+    item.setValue(newItem.name, forKey: "name")
+    item.setValue(newItem.amount, forKey: "amount")
+    item.setValue(newItem.frequency, forKey: "frequency")
+    item.setValue(newItem.isDone, forKey: "isDone")
+    
+    do {
+      try managedContext.save()
+      items.append(item)
+    } catch let error as NSError {
+      print("Could not save. \(error), \(error.userInfo)")
+    }
     DispatchQueue.main.async {
       self.reloadView()
+    }
+  }
+}
+
+extension TodayViewController {
+  private func saveToCoreData() {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+      return }
+    
+    do {
+      try appDelegate.persistentContainer.viewContext.save()
+    } catch let error as NSError {
+      print("Could not save. \(error), \(error.userInfo)")
     }
   }
 }
