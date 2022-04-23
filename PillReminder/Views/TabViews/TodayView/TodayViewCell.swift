@@ -31,9 +31,7 @@ class TodayViewCell: UITableViewCell {
   
   // Utils
   static let reuseID = "AccountSummaryCell"
-  static let rowHeight: CGFloat = 112
-  var isDone = false
-  
+  static let rowHeight: CGFloat = 112  
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -115,6 +113,7 @@ extension TodayViewCell {
     nameLabel.text = vm.itemName
     amountLabel.text = vm.amount
     frequencyLabel.text = vm.frequency
+    changeCheckmark(isDone: isDone)
   }
   
   func changeCheckmark(isDone: Bool) {

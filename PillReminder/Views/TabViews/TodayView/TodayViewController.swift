@@ -31,7 +31,7 @@ class TodayViewController: UIViewController {
     layout()
     setupTable()
     registerTableViewCells()
-    reloadView()
+    loadData()
   }
 }
 // Table Setup
@@ -55,28 +55,21 @@ extension TodayViewController {
     self.myTable.register(itemCell, forCellReuseIdentifier: "CustomTableViewCell")
   }
   
-  private func reloadView() {
-    //1
-    guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
+  private func loadData() {
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
       return
     }
     
-    let managedContext =
-    appDelegate.persistentContainer.viewContext
+    let managedContext = appDelegate.persistentContainer.viewContext
     
-    //2
-    let fetchRequest =
-    NSFetchRequest<NSManagedObject>(entityName: "Item")
+    let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Item")
     
-    //3
     do {
       items = try managedContext.fetch(fetchRequest)
     } catch let error as NSError {
       print("Could not fetch. \(error), \(error.userInfo)")
     }
     self.configureTableCells(with: self.items)
-    self.myTable.reloadData()
   }
   private func style() {
     
@@ -144,10 +137,6 @@ extension TodayViewController {
     myTable.reloadData()
     print(itemArray)
   }
-  
-  func changeCheckmark(item: ItemToTake) {
-    
-  }
 }
 
 // MARK: TableView protocols
@@ -185,17 +174,18 @@ extension TodayViewController: UITableViewDataSource {
   
   private func configureTableCells(with itemsToUse: [NSManagedObject]) {
     todayCellViewModels = itemsToUse.map {
-      TodayViewCell.ViewModel(itemName: $0.value(forKey: "name") as! String, amount: $0.value(forKey: "amount") as! String, frequency: $0.value(forKey: "frequency") as! String, isDone: false)
+      TodayViewCell.ViewModel(itemName: $0.value(forKey: "name") as! String, amount: $0.value(forKey: "amount") as! String, frequency: $0.value(forKey: "frequency") as! String, isDone: $0.value(forKey: "isDone") as! Bool)
     }
   }
 }
 extension TodayViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let cell = myTable.cellForRow(at: indexPath) as! TodayViewCell
     var myBool = items[indexPath.row].value(forKey: "isDone") as! Bool
-    print(myBool)
     myBool = !myBool
+    cell.changeCheckmark(isDone: myBool)
+    items[indexPath.row].setValue(myBool, forKey: "isDone")
     saveToCoreData()
-    print(myBool)
   }
 }
 
@@ -223,7 +213,8 @@ extension TodayViewController: NewItemViewControllerDelegate {
       print("Could not save. \(error), \(error.userInfo)")
     }
     DispatchQueue.main.async {
-      self.reloadView()
+      self.loadData()
+      self.myTable.reloadData()
     }
   }
 }
@@ -232,9 +223,9 @@ extension TodayViewController {
   private func saveToCoreData() {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
       return }
-    
+    let managedContext = appDelegate.persistentContainer.viewContext
     do {
-      try appDelegate.persistentContainer.viewContext.save()
+      try managedContext.save()
     } catch let error as NSError {
       print("Could not save. \(error), \(error.userInfo)")
     }

@@ -24,6 +24,7 @@ class CalendarViewController: UIViewController {
     super.viewDidLayoutSubviews()
     calendar.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height / 1.5 )
     calendar.frame = calendar.frame.inset(by: UIEdgeInsets(top: 40, left: 16, bottom: 16, right: 16))
+    
   }
 }
 
@@ -43,5 +44,6 @@ extension CalendarViewController: FSCalendarDelegate {
     formatter.dateFormat = "EEEE MM-dd-YYYY"
     let string = formatter.string(from: date)
     print("\(string)")
+    
   }
 }
